@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968981748019",
+    "project_id": "ngodeyuk-25988",
+    "storage_bucket": "ngodeyuk-25988.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968981748019:android:2e26ad67f2ce7a2eda4646",
+        "android_client_info": {
+          "package_name": "com.example.ngodeyuk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCawo1VZJivO6IVho7V409fkTHV3ma_2HA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
