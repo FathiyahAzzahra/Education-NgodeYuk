@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     ActivityPage(), // Halaman Activity
     CalendarPage(), // Halaman Calendar
     AssignmentsPage(), // Halaman Assignments
-    ChatPage(), // Halaman Chat
+    ChatScreen(), // Halaman Chat
     ProfilePage(), // Halaman Profile
   ];
 
