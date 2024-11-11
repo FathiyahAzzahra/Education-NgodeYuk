@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../courses/courses_page.dart';
-import '../activity/activity_page.dart'; // Tambahkan halaman Activity
+import '../activity/NotificationView.dart'; // Tambahkan halaman Activity
 import '../calendar/calendar_page.dart'; // Tambahkan halaman Calendar
 import '../assignments/assignments_page.dart'; // Tambahkan halaman Assignments
 import '../chat/chat_page.dart'; // Tambahkan halaman Chat
@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   // Daftar halaman yang akan ditampilkan berdasarkan tab yang dipilih
   static final List<Widget> _widgetOptions = <Widget>[
     CoursesPage(), // Halaman Courses
-    ActivityPage(), // Halaman Activity
+    NotificationView(), // Halaman Activity
     CalendarPage(), // Halaman Calendar
     AssignmentsPage(), // Halaman Assignments
     ChatPage(), // Halaman Chat
