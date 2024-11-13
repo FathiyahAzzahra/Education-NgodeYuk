@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'services/firestore_service.dart';
-import 'package:ngodeyuk/controller/course_controller.dart';
+import '../controller/course_controller.dart';
 import 'screens/home/home_page.dart';
+import 'screens/welcome/login_screen.dart'; // Impor LoginScreen
+import 'screens/welcome/welcome_screen.dart'; // Impor WelcomeScreen
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +28,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(), // Menetapkan HomePage sebagai halaman utama
+      initialRoute: '/welcome', // Rute awal diatur ke WelcomeScreen
+      routes: {
+        '/welcome': (context) =>
+            WelcomeScreen(), // Definisikan rute WelcomeScreen
+        '/login': (context) => LoginScreen(), // Definisikan rute LoginScreen
+        '/home': (context) => HomePage(), // Definisikan rute HomePage
+      },
     );
   }
 }
