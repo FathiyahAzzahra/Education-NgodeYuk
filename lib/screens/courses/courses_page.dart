@@ -5,16 +5,17 @@ import '../../services/firestore_service.dart'; // Import FirestoreService
 import '../../models/course_model.dart'; // Pastikan path-nya sesuai
 
 class CoursesPage extends StatelessWidget {
-  final FirestoreService firestoreService =
-      FirestoreService(); // Instance FirestoreService
+  final FirestoreService firestoreService = FirestoreService();
+
+  CoursesPage({super.key}); // Instance FirestoreService
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFF7D1),
+      backgroundColor: const Color(0xFFFFF7D1),
       appBar: AppBar(
-        backgroundColor: Color(0xFFFFB0B0),
-        title: Text("Courses"),
+        backgroundColor: const Color(0xFFFFB0B0),
+        title: const Text("Courses"),
         elevation: 0,
       ),
       body: FutureBuilder(
@@ -22,11 +23,11 @@ class CoursesPage extends StatelessWidget {
             firestoreService.getCourses(), // Ambil data kursus dari Firestore
         builder: (context, AsyncSnapshot<List<Course>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text("No courses available."));
+            return const Center(child: Text("No courses available."));
           }
 
           final courses = snapshot.data!;
@@ -38,7 +39,7 @@ class CoursesPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildUserProfile(),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildSubjectsGrid(courses, context),
                 ],
               ),
@@ -50,7 +51,7 @@ class CoursesPage extends StatelessWidget {
   }
 
   Widget _buildUserProfile() {
-    return Row(
+    return const Row(
       children: [
         CircleAvatar(
           radius: 30,
@@ -76,7 +77,7 @@ class CoursesPage extends StatelessWidget {
   Widget _buildSubjectsGrid(List<Course> courses, BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 16,
@@ -101,21 +102,21 @@ class CoursesPage extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xFFFFECC8),
+          color: const Color(0xFFFFECC8),
           borderRadius: BorderRadius.circular(16),
         ),
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.book, size: 40, color: Color(0xFFFFB0B0)),
-            SizedBox(height: 8),
+            const Icon(Icons.book, size: 40, color: Color(0xFFFFB0B0)),
+            const SizedBox(height: 8),
             Text(
               course.name,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
-            SizedBox(height: 4),
-            Text(course.students, style: TextStyle(fontSize: 12)),
+            const SizedBox(height: 4),
+            Text(course.students, style: const TextStyle(fontSize: 12)),
           ],
         ),
       ),

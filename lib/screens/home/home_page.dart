@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import '../courses/courses_page.dart';
 import '../activity/activity_page.dart'; // Tambahkan halaman Activity
 import '../calendar/calendar_page.dart'; // Tambahkan halaman Calendar
-import '../assignments/assignments_page.dart'; // Tambahkan halaman Assignments
+import '../assignments/assignment_quiz.dart'; // Tambahkan halaman Assignments
+// import '../assignments/grades_page.dart';
+// import '../assignments/quiz_page.dart';
 import '../chat/chat_page.dart'; // Tambahkan halaman Chat
 import '../profile/profile_page.dart'; // Tambahkan halaman Profile
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -19,7 +23,11 @@ class _HomePageState extends State<HomePage> {
     CoursesPage(), // Halaman Courses
     ActivityPage(), // Halaman Activity
     CalendarPage(), // Halaman Calendar
-    AssignmentsPage(), // Halaman Assignments
+    AssignmentQuizPage(),
+    // AssignmentPage(), // Halaman Assignments
+    // QuizPage(),
+    // GradesPage(),
+
     ChatPage(), // Halaman Chat
     ProfilePage(), // Halaman Profile
   ];

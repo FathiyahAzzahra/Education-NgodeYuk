@@ -8,14 +8,14 @@ class ChapterListPage extends StatelessWidget {
   final FirestoreService firestoreService =
       FirestoreService(); // Instance FirestoreService
 
-  ChapterListPage({required this.subjectName});
+  ChapterListPage({super.key, required this.subjectName});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFF7D1),
+      backgroundColor: const Color(0xFFFFF7D1),
       appBar: AppBar(
-        backgroundColor: Color(0xFFFFB0B0),
+        backgroundColor: const Color(0xFFFFB0B0),
         title: Text("$subjectName Chapters"),
       ),
       body: FutureBuilder(
@@ -23,11 +23,11 @@ class ChapterListPage extends StatelessWidget {
             .getChapters(subjectName), // Ambil data bab dari Firestore
         builder: (context, AsyncSnapshot<List<Chapter>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text("No chapters available."));
+            return const Center(child: Text("No chapters available."));
           }
 
           final chapters = snapshot.data!;
@@ -56,22 +56,22 @@ class ChapterListPage extends StatelessWidget {
         );
       },
       child: Card(
-        color: Color(0xFFFFECC8),
-        margin: EdgeInsets.symmetric(vertical: 8),
+        color: const Color(0xFFFFECC8),
+        margin: const EdgeInsets.symmetric(vertical: 8),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: Color(0xFFFFD09B),
+            backgroundColor: const Color(0xFFFFD09B),
             child: Text(chapterNumber.toString()),
           ),
           title: Text(chapter.title),
           subtitle: Row(
             children: [
               Text(chapter.views),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               Text("⭐ ${chapter.rating}"),
             ],
           ),
-          trailing: Icon(Icons.lock_outline, color: Color(0xFFFFB0B0)),
+          trailing: const Icon(Icons.lock_outline, color: Color(0xFFFFB0B0)),
         ),
       ),
     );
