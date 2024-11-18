@@ -1,11 +1,10 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:ngodeyuk/screens/Authentication/signup.dart';
 import 'services/firestore_service.dart';
 import '../controller/course_controller.dart';
-import 'screens/home/home_page.dart';
-import 'screens/welcome/login_screen.dart'; // Impor LoginScreen
-import 'screens/welcome/welcome_screen.dart'; // Impor WelcomeScreen
+// import 'screens/home/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,13 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/welcome', // Rute awal diatur ke WelcomeScreen
-      routes: {
-        '/welcome': (context) =>
-            WelcomeScreen(), // Definisikan rute WelcomeScreen
-        '/login': (context) => LoginScreen(), // Definisikan rute LoginScreen
-        '/home': (context) => HomePage(), // Definisikan rute HomePage
-      },
+      home: SignupScreen(),
     );
   }
 }
