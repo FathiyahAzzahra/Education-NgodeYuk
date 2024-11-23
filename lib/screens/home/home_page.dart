@@ -7,6 +7,8 @@ import '../chat/chat_page.dart'; // Tambahkan halaman Chat
 import '../profile/profile_page.dart'; // Tambahkan halaman Profile
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }

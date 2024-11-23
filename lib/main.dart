@@ -1,9 +1,10 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:ngodeyuk/screens/Authentication/signup.dart';
 import 'services/firestore_service.dart';
-import 'package:ngodeyuk/controller/course_controller.dart';
-import 'screens/home/home_page.dart';
+import '../controller/course_controller.dart';
+// import 'screens/home/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(), // Menetapkan HomePage sebagai halaman utama
+      debugShowCheckedModeBanner: false,
+      home: const SignupScreen(),
     );
   }
 }
