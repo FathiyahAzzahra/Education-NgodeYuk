@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ngodeyuk/screens/authentication/home_screen.dart';
+import 'package:ngodeyuk/screens/home/home_page.dart';
 
 class OTPScreen extends StatefulWidget {
   final String verificationId;
+
   const OTPScreen({super.key, required this.verificationId});
 
   @override
@@ -12,83 +13,65 @@ class OTPScreen extends StatefulWidget {
 
 class _OTPScreenState extends State<OTPScreen> {
   TextEditingController otpController = TextEditingController();
-  // we have also add the circular profressIndicator during waiting time
-  bool isLoadin = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      appBar: AppBar(
+        title: const Text('OTP Verification'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("images/otpimage.jpg"),
-            const Text(
-              "OTP Verification",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              ),
+            // Menambahkan gambar di atas input OTP
+            Image.asset(
+              'assets/otp.png', // Ganti URL dengan URL gambar yang diinginkan
+              height: 200, // Atur tinggi gambar sesuai kebutuhan
+              width: 200, // Atur lebar gambar jika diperlukan
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                "We need to register your phone number by using a one-time OTP code verfification.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: TextField(
-                controller: otpController,
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: "+9771234567890",
-                  labelText: "Enter the Phone Number",
-                ),
+            const SizedBox(height: 20), // Spasi setelah gambar
+            TextField(
+              controller: otpController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter OTP',
               ),
             ),
             const SizedBox(height: 20),
-            isLoadin
-                ? const CircularProgressIndicator()
-                : ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                    onPressed: () async {
-                      setState(() {
-                        isLoadin = true;
-                      });
-                      try {
-                        final credential = PhoneAuthProvider.credential(
-                          verificationId: widget.verificationId,
-                          smsCode: otpController.text,
-                        );
-                        await FirebaseAuth.instance
-                            .signInWithCredential(credential);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
-                          ),
-                        );
-                      } catch (e) {
-                        print(e);
-                      }
-                      setState(() {
-                        isLoadin = false;
-                      });
-                    },
-                    child: const Text(
-                      "Send Code",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ))
+            ElevatedButton(
+              onPressed: () async {
+                String otp = otpController.text.trim();
+
+                // Verifikasi OTP dengan menggunakan verificationId
+                try {
+                  PhoneAuthCredential credential = PhoneAuthProvider.credential(
+                    verificationId: widget
+                        .verificationId, // Menggunakan verificationId dari konstruktor
+                    smsCode: otp,
+                  );
+
+                  // Menggunakan credential untuk sign-in
+                  await FirebaseAuth.instance.signInWithCredential(credential);
+                  print("OTP Verified and User Signed In!");
+                  // Setelah berhasil login, arahkan ke halaman utama atau halaman lainnya
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
+                } catch (e) {
+                  print("Error: $e");
+                  // Tampilkan pesan kesalahan atau proses lebih lanjut jika diperlukan
+                }
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              child: const Text(
+                'Verify OTP',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           ],
         ),
       ),

@@ -6,7 +6,7 @@ import 'package:ngodeyuk/screens/authentication/phoneAuth/phone_login.dart';
 import 'package:ngodeyuk/screens/authentication/services/authentication.dart';
 import 'package:ngodeyuk/screens/authentication/widgets/snackbar.dart';
 import 'package:ngodeyuk/screens/authentication/widgets/text_field.dart';
-import 'home_screen.dart';
+import 'package:ngodeyuk/screens/home/home_page.dart';
 import 'signup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -41,9 +41,11 @@ class _LoginScreenState extends State<LoginScreen> {
         isLoading = false;
       });
 
+      // Mengganti navigasi ke HomePage setelah login berhasil
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) =>
+              const HomePage(), // Ganti HomeScreen dengan HomePage
         ),
       );
     } else {
@@ -119,7 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const HomeScreen(),
+                                builder: (context) =>
+                                    const HomePage(), // Ganti HomeScreen dengan HomePage
                               ),
                             );
                           },
