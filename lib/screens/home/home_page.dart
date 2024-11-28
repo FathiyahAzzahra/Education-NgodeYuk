@@ -35,9 +35,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('EduApp'),
-      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -70,8 +67,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Color(0xFFB0A565), // Menggunakan warna #B0A565
+        unselectedItemColor: Color(0xFF383A56), // Menggunakan warna #383A56
+        backgroundColor: Color(0xFFEDE68A).withOpacity(0.8), // Transparansi 80%
         onTap: _onItemTapped,
       ),
     );
