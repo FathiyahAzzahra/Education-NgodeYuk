@@ -11,11 +11,16 @@ class CoursesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFF7D1),
       appBar: AppBar(
-        backgroundColor: Color(0xFFFFB0B0),
-        title: Text("Courses"),
-        elevation: 0,
+        title: const Text(
+          'Courses',
+          style: TextStyle(
+            color: Color(0xFFB0A565), // Mengubah warna teks
+            fontWeight: FontWeight.bold, // Membuat teks menjadi bold
+          ),
+        ),
+        automaticallyImplyLeading: false,
+        backgroundColor: Color(0xFF383A56), // Mengubah warna AppBar
       ),
       body: FutureBuilder(
         future:
