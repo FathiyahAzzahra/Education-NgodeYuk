@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ngodeyuk/screens/courses/chapters.dart';
 import '../../services/firestore_service.dart'; // Import FirestoreService
 import '../../models/course_model.dart'; // Pastikan path-nya sesuai
-import '../courses/PremiumCoursesPage.dart';
+import '../payment/premium_courses.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
