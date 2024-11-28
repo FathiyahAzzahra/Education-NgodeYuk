@@ -6,28 +6,38 @@ class PremiumCoursesPage extends StatelessWidget {
     {
       'title': 'English Academy Premium Dasher',
       'price': 'Rp3.428.600',
-      'description': 'Untuk anak usia 3-6 tahun'
+      'description': 'Untuk anak usia 3-6 tahun',
+      'imageURL':
+          'https://images.unsplash.com/photo-1543109740-4bdb38fda756?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       'title': 'Science Explorer Pro',
       'price': 'Rp4.500.000',
-      'description': 'Kursus eksklusif untuk pelajar usia 7-12 tahun'
+      'description': 'Kursus eksklusif untuk pelajar usia 7-12 tahun',
+      'imageURL':
+          'https://images.unsplash.com/photo-1596496356956-bbc213c96988?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       'title': 'Math Mastery Advanced',
       'price': 'Rp5.250.000',
-      'description': 'Program intensif untuk menguasai matematika SD-SMA'
+      'description': 'Program intensif untuk menguasai matematika SD-SMA',
+      'imageURL':
+          'https://images.unsplash.com/photo-1676302440263-c6b4cea29567?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       'title': 'Coding For Kids',
       'price': 'Rp3.800.000',
-      'description': 'Program belajar coding untuk anak usia 8-15 tahun'
+      'description': 'Program belajar coding untuk anak usia 8-15 tahun',
+      'imageURL':
+          'https://images.unsplash.com/photo-1565229284535-2cbbe3049123?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
     {
       'title': 'Public Speaking Masterclass',
       'price': 'Rp6.000.000',
       'description':
-          'Kursus untuk meningkatkan kemampuan berbicara di depan umum, usia 12+'
+          'Kursus untuk meningkatkan kemampuan berbicara di depan umum, usia 12+',
+      'imageURL':
+          'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
   ];
 
@@ -85,13 +95,24 @@ class PremiumCoursesPage extends StatelessWidget {
             course['title']!,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 18,
+                fontSize: 20,
                 color: Color(0xFF2F3032)),
           ),
           SizedBox(height: 8),
+          if (course['imageURL'] != null)
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                course['imageURL']!,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 150,
+              ),
+            ),
+          SizedBox(height: 8),
           Text(
             course['description']!,
-            style: TextStyle(fontSize: 14, color: Color(0xFF383A56)),
+            style: TextStyle(fontSize: 17, color: Color(0xFF383A56)),
           ),
           SizedBox(height: 12),
           Row(
@@ -100,13 +121,12 @@ class PremiumCoursesPage extends StatelessWidget {
               Text(
                 course['price']!,
                 style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.red),
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Kirim data paket yang dipilih ke PackagePage
                   Navigator.push(
                     context,
                     MaterialPageRoute(

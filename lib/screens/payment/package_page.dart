@@ -251,40 +251,156 @@ Kuasai seni berbicara di depan umum dengan kursus yang dirancang untuk meningkat
 
   // Function to show the PIN dialog
   void _showPinDialog(BuildContext context, String paymentMethod) {
-    TextEditingController pinController = TextEditingController();
+    List<String> pinDigits = List.filled(6, ""); // Menyimpan PIN
+    int currentIndex = 0; // Indeks saat ini untuk input PIN
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Masukkan PIN untuk $paymentMethod"),
-          content: TextField(
-            controller: pinController,
-            obscureText: true,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: "PIN"),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text("Batal"),
-            ),
-            TextButton(
-              onPressed: () {
-                if (pinController.text.isNotEmpty) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => InvoicePage(course: course),
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Color(0xFFEDE68A), // Warna latar belakang
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Masukkan PIN untuk $paymentMethod",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF2F3032),
+                      ),
                     ),
-                  );
-                }
-              },
-              child: Text("Konfirmasi"),
-            ),
-          ],
+                    SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: List.generate(6, (index) {
+                        return Container(
+                          width: 40,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 4,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Text(
+                              pinDigits[index].isEmpty ? "" : "●", // Simbol PIN
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF2F3032),
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                    SizedBox(height: 16),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
+                      ),
+                      itemCount: 12,
+                      itemBuilder: (context, index) {
+                        String value = index < 9
+                            ? "${index + 1}"
+                            : (index == 9
+                                ? "B"
+                                : index == 10
+                                    ? "0"
+                                    : "C");
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              if (value == "B" && currentIndex > 0) {
+                                currentIndex--;
+                                pinDigits[currentIndex] =
+                                    ""; // Hapus digit terakhir
+                              } else if (value == "C") {
+                                pinDigits.fillRange(0, 6, ""); // Reset semua
+                                currentIndex = 0;
+                              } else if (currentIndex < 6) {
+                                pinDigits[currentIndex] = value;
+                                currentIndex++;
+                              }
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xFF2F3032),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Center(
+                              child: Text(
+                                value,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Color(0xFFEDE68A),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            "Batal",
+                            style: TextStyle(color: Color(0xFF2F3032)),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            if (currentIndex == 6) {
+                              // Pastikan PIN lengkap
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      InvoicePage(course: course),
+                                ),
+                              );
+                            }
+                          },
+                          child: Text(
+                            "Konfirmasi",
+                            style: TextStyle(color: Color(0xFF2F3032)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         );
       },
     );
