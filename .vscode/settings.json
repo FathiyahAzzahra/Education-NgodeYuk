@@ -1,6 +1,4 @@
 {
-    "cSpell.words": [
-        "allprojects",
-        "ngodeyuk"
-    ]
+  "cSpell.words": ["allprojects", "ngodeyuk"],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

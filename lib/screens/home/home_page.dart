@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../courses/courses_page.dart';
 import '../activity/activity_page.dart'; // Tambahkan halaman Activity
-import '../calendar/calendar_page.dart'; // Tambahkan halaman Calendar
+import '../calendar/calendar_screen.dart'; // Tambahkan halaman Calendar
 import '../assignments/assignments_page.dart'; // Tambahkan halaman Assignments
 import '../chat/chat_page.dart'; // Tambahkan halaman Chat
 import '../profile/profile_page.dart'; // Tambahkan halaman Profile
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   static final List<Widget> _widgetOptions = <Widget>[
     CoursesPage(), // Halaman Courses
     ActivityPage(), // Halaman Activity
-    CalendarPage(), // Halaman Calendar
+    CalendarScreen(), // Halaman Calendar
     AssignmentsPage(), // Halaman Assignments
     ChatPage(), // Halaman Chat
     ProfilePage(), // Halaman Profile
