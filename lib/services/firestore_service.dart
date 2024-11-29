@@ -2,9 +2,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/chapter_model.dart';
 import '../models/course_model.dart';
+import '../models/event_model.dart';
 
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+// Menambahkan referensi koleksi untuk events
+  final CollectionReference eventCollection =
+      FirebaseFirestore.instance.collection('events');
 
   // Future<List<Course>> getCoursesPaginated({int limit = 10}) async {
   //   var snapshot = await _db.collection('courses').limit(limit).get();
@@ -324,4 +329,60 @@ class FirestoreService {
   //       .get();
   //   return snapshot.docs.map((doc) => Chapter.fromMap(doc.data())).toList();
   // }
+
+  // CRUD UNTUK EVENTS
+
+  /// Menambahkan event baru ke koleksi Firebase Firestore.
+  Future<void> addEvent(String name, DateTime date, String time) async {
+    try {
+      // Validasi input
+      if (name.isEmpty || time.isEmpty) {
+        throw Exception("Event name or time cannot be empty.");
+      }
+
+      // Tambahkan event dengan ID otomatis
+      await eventCollection.add({
+        'name': name,
+        'date': Timestamp.fromDate(date), // Simpan sebagai timestamp
+        'time': time, // Simpan waktu dalam format string
+      });
+    } catch (e) {
+      throw Exception('Failed to add event. Error: $e');
+    }
+  }
+
+  /// Mengambil semua event dari Firestore dan mengonversinya menjadi Map<DateTime, List<String>>.
+  Future<Map<DateTime, List<String>>> getEventsAsMap() async {
+    try {
+      var snapshot =
+          await eventCollection.orderBy('date').orderBy('time').get();
+
+      Map<DateTime, List<String>> eventMap = {};
+
+      for (var doc in snapshot.docs) {
+        DateTime? eventDate = (doc['date'] as Timestamp?)?.toDate();
+        String? eventName = doc['name'];
+        String? eventTime = doc['time'];
+
+        if (eventDate == null || eventName == null || eventTime == null) {
+          continue;
+        }
+
+        DateTime formattedDate = DateTime(
+          eventDate.year,
+          eventDate.month,
+          eventDate.day,
+        );
+
+        if (!eventMap.containsKey(formattedDate)) {
+          eventMap[formattedDate] = [];
+        }
+        eventMap[formattedDate]?.add('$eventName at $eventTime');
+      }
+
+      return eventMap;
+    } catch (e) {
+      throw Exception('Error fetching events: $e');
+    }
+  }
 }
