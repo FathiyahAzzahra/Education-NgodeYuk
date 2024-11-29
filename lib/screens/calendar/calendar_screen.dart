@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ngodeyuk/models/event_model.dart';
+// import 'package:ngodeyuk/models/event_model.dart';
 import '../../services/firestore_service.dart';
 import '../calendar/widgets/calendar_widget.dart';
 import '../calendar/widgets/daily_task_widget.dart';
@@ -90,20 +90,18 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 119, 121, 126),
       appBar: AppBar(
-        backgroundColor: Color(0xFF383A56),
-        elevation: 2,
-        centerTitle: true,
-        title: Text(
+        title: const Text(
           'Calendar',
           style: TextStyle(
-            color: Color(0xFFEDE68A),
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
+            color: Color(0xFFB0A565), // Mengubah warna teks
+            fontWeight: FontWeight.bold, // Membuat teks menjadi bold
           ),
         ),
+        automaticallyImplyLeading: false,
+        backgroundColor: Color(0xFF383A56), // Mengubah warna AppBar
       ),
+      backgroundColor: Color.fromARGB(255, 119, 121, 126),
       body: Column(
         children: [
           Padding(

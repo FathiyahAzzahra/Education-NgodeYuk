@@ -48,6 +48,7 @@ dependencies:
   permission_handler: ^10.2.0
   toast: ^0.2.9
   table_calendar: ^3.1.0
+  shared_preferences: ^2.0.15 
   # url_launcher: ^6.3.1
 
   # video_player: ^2.5.6

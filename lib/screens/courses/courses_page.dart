@@ -43,6 +43,7 @@ class CoursesPage extends StatelessWidget {
             onPressed: () {},
           ),
         ],
+        automaticallyImplyLeading: false,
       ),
       body: FutureBuilder(
         future: firestoreService.getCourses(),

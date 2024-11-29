@@ -128,12 +128,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             children: [
                               Expanded(
                                 child:
-                                    Container(height: 1, color: Colors.black26),
+                                    Container(height: 1, color: Colors.white),
                               ),
-                              const Text("  or  "),
+                              const Text(
+                                "  or  ",
+                                style: TextStyle(color: Colors.white),
+                              ),
                               Expanded(
-                                child:
-                                    Container(height: 1, color: Colors.black26),
+                                child: Container(
+                                  height: 1,
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
                           ),
@@ -142,7 +147,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 horizontal: 25, vertical: 10),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.blueGrey),
+                                backgroundColor: Colors.blueGrey,
+                              ),
                               onPressed: () async {
                                 await FirebaseServices().signInWithGoogle();
                                 Navigator.pushReplacement(
@@ -202,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors
-                                          .blue, // Color set to red for the "SignUp" part
+                                          .blue, // Color set to blue for the "SignUp" part
                                     ),
                                   ),
                                 ),
