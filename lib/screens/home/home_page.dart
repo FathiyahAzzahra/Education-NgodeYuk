@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../courses/courses_page.dart';
 import '../activity/NotificationView.dart'; // Tambahkan halaman Activity
-import '../calendar/calendar_page.dart'; // Tambahkan halaman Calendar
+import '../calendar/calendar_screen.dart'; // Tambahkan halaman Calendar
 import '../assignments/assignments_page.dart'; // Tambahkan halaman Assignments
 import '../chat/chat_page.dart'; // Tambahkan halaman Chat
-import '../profile/profile_page.dart'; // Tambahkan halaman Profile
+import '../profile/main_profile.dart'; // Tambahkan halaman Profile
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,16 +14,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 5;
 
   // Daftar halaman yang akan ditampilkan berdasarkan tab yang dipilih
   static final List<Widget> _widgetOptions = <Widget>[
     CoursesPage(), // Halaman Courses
     NotificationView(), // Halaman Activity
-    CalendarPage(), // Halaman Calendar
+    CalendarScreen(), // Halaman Calendar
     AssignmentsPage(), // Halaman Assignments
     ChatPage(), // Halaman Chat
-    ProfilePage(), // Halaman Profile
+    MainProfileScreen(), // Halaman Profile
   ];
 
   void _onItemTapped(int index) {

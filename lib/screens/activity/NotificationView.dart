@@ -133,10 +133,14 @@ class NotificationView extends StatelessWidget {
             SizedBox(width: 8),
             Text(
               'Notification Screen',
-              style: TextStyle(color: Color(0xFFEDE68A)),
+              style: TextStyle(
+                color: Color(0xFFEDE68A),
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: Icon(Icons.settings, color: Color(0xFFEDE68A)),
@@ -158,17 +162,18 @@ class NotificationView extends StatelessWidget {
                 ),
               );
             },
-            child: ListViewItem(notifications[index]),
+            child: listViewItem(notifications[index]),
           );
         },
-        separatorBuilder: (context, index) {
-          return Divider(height: 0, color: accentColor);
-        },
+        separatorBuilder: (context, index) => Divider(
+          height: 0,
+          color: accentColor,
+        ),
       ),
     );
   }
 
-  Widget ListViewItem(Map<String, String> notification) {
+  Widget listViewItem(Map<String, String> notification) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
       decoration: BoxDecoration(
@@ -222,7 +227,7 @@ class NotificationView extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -255,8 +260,10 @@ class NotificationDetailPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF383A56),
         elevation: 0,
-        title: Text(notification['title']!,
-            style: TextStyle(color: Color(0xFFEDE68A))),
+        title: Text(
+          notification['title']!,
+          style: TextStyle(color: Color(0xFFEDE68A)),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

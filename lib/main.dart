@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:ngodeyuk/screens/Authentication/signup.dart';
 import 'services/firestore_service.dart';
 import '../controller/course_controller.dart';
-// import 'screens/home/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
