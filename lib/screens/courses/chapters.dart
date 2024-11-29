@@ -5,7 +5,7 @@ import '../../models/chapter_model.dart';
 import '../../models/user_model.dart';
 import '../../services/firestore_service.dart';
 import '../courses/chapterdetail_page.dart';
-import '../assignments/assignments_page.dart';
+import '../assignments/assignments_quiz.dart';
 
 class ChapterListPage extends StatefulWidget {
   final String subjectName;
@@ -277,7 +277,8 @@ class _ChapterListPageState extends State<ChapterListPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AssignmentsPage(), // Navigasi ke quiz
+                  builder: (context) =>
+                      AssignmentQuizPage(), // Navigasi ke quiz
                 ),
               );
             },
