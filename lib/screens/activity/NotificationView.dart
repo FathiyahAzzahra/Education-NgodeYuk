@@ -19,7 +19,105 @@ class NotificationView extends StatelessWidget {
       'imageUrl':
           'https://images.unsplash.com/photo-1543109740-4bdb38fda756?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
-    // Tambahkan elemen lainnya di sini...
+    {
+      'title': '📚 Kelas Promo untuk Anak SMA',
+      'description':
+          '✨ Kursus Matematika Tingkat SMA tersedia dengan harga spesial! Daftar sekarang dan mulai belajar.',
+      'date': '23-11-2024',
+      'time': '02:30 pm',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1509869175650-a1d97972541a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      'title': '🎁 Voucher Gratis!',
+      'description':
+          '🎉 Ikuti kelas Coding for Kids dan dapatkan Voucher Rp100.000. Hanya untuk 10 pendaftar pertama!',
+      'date': '22-11-2024',
+      'time': '01:00 pm',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1662116138312-ad7926c2e018?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      'title': '🌟 Eksklusif untuk Pelanggan Baru',
+      'description':
+          '✨ Pelanggan baru akan mendapatkan modul gratis untuk kursus apa saja yang dipilih.',
+      'date': '21-11-2024',
+      'time': '04:00 pm',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      'title': '⏳ Periode Terbatas!',
+      'description':
+          '🗣 Pendaftaran kursus Public Speaking dibuka hingga 1 Desember 2024. Jangan lewatkan!',
+      'date': '20-11-2024',
+      'time': '08:45 am',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1515603403036-f3d35f75ca52?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      'title': '🎓 Seminar Gratis!',
+      'description':
+          '👩‍🏫 Ikuti seminar How to Ace Your Exams tanpa biaya! Registrasi sebelum 25 November 2024.',
+      'date': '19-11-2024',
+      'time': '09:30 am',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      'title': '🚀 Update Materi Baru!',
+      'description':
+          '📖 Materi kursus Data Science telah diperbarui dengan bab terbaru! Jangan sampai ketinggalan.',
+      'date': '18-11-2024',
+      'time': '07:00 pm',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1542744173-05336fcc7ad4?q=80&w=2002&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      'title': '👨‍💻 Kursus Coding untuk Pemula',
+      'description':
+          '💻 Mulai belajar coding dari nol dengan kursus interaktif. Promo berlaku hingga 27 November 2024.',
+      'date': '17-11-2024',
+      'time': '06:15 pm',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      'title': '🎯 Tantangan Belajar Bulanan',
+      'description':
+          '🏆 Ikuti tantangan belajar dan dapatkan kesempatan memenangkan hadiah menarik!',
+      'date': '16-11-2024',
+      'time': '11:00 am',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?q=80&w=1776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      'title': '📝 Kursus Menulis Kreatif',
+      'description':
+          '📜 Temukan cara menjadi penulis kreatif! Kursus dengan mentor profesional dimulai 5 Desember 2024.',
+      'date': '15-11-2024',
+      'time': '03:45 pm',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      'title': '🔔 Reminder: Perbarui Paket Premium',
+      'description':
+          '⏰ Jangan lupa perbarui paket premium Anda untuk terus mengakses materi tanpa gangguan.',
+      'date': '14-11-2024',
+      'time': '10:20 am',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+      'title': '🛍 Flash Sale Hari Ini!',
+      'description':
+          '⏳ Dapatkan diskon hingga 70% untuk semua kursus dalam kategori teknologi. Promo hanya berlaku hari ini!',
+      'date': '13-11-2024',
+      'time': '08:00 am',
+      'imageUrl':
+          'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
   ];
 
   @override

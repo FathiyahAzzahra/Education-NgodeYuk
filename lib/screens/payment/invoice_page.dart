@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'premium_courses.dart';
+import '../home/home_page.dart';
 
 class InvoicePage extends StatelessWidget {
   final Map<String, String> course;
@@ -107,7 +107,7 @@ class InvoicePage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => PremiumCoursesPage()),
+                  MaterialPageRoute(builder: (context) => HomePage()),
                   (Route<dynamic> route) => false,
                 );
               },

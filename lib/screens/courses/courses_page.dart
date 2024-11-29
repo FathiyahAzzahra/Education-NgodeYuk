@@ -132,10 +132,13 @@ class CoursesPage extends StatelessWidget {
         return Row(
           children: [
             CircleAvatar(
+              backgroundColor:
+                  Color(0xFF383A56), // Warna latar belakang lingkaran
+
               radius: 30,
               child: Text(
                 userData['name'][0], // Huruf pertama nama sebagai avatar
-                style: TextStyle(fontSize: 24, color: Colors.white),
+                style: TextStyle(fontSize: 24, color: Color(0xFFEDE68A)),
               ),
             ),
             SizedBox(width: 16),
