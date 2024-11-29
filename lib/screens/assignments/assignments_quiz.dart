@@ -58,6 +58,7 @@ class _AssignmentQuizPageState extends State<AssignmentQuizPage> {
               Tab(text: 'Quiz'),
             ],
           ),
+          automaticallyImplyLeading: false,
         ),
         body: TabBarView(
           children: [
@@ -153,7 +154,8 @@ class _AssignmentQuizPageState extends State<AssignmentQuizPage> {
                                 children: [
                                   _buildTaskCard(
                                     title: "Dasar-Dasar Pemrograman",
-                                    color: _paletteColors[3],
+
+                                    color: _paletteColors[2],
                                     // members: [
                                     //   'assets/foto1.jpg',
                                     //   'assets/foto1.jpg'
@@ -169,8 +171,8 @@ class _AssignmentQuizPageState extends State<AssignmentQuizPage> {
                                   ),
                                   const SizedBox(width: 10),
                                   _buildTaskCard(
-                                    title: "Logika dan Matematika dalam Coding",
-                                    color: _paletteColors[3],
+                                    title: "Matematika dalam Coding",
+                                    color: _paletteColors[2],
                                     // members: [
                                     //   'assets/user1.png',
                                     //   'assets/user5.png'
@@ -179,7 +181,7 @@ class _AssignmentQuizPageState extends State<AssignmentQuizPage> {
                                   ),
                                   const SizedBox(width: 10),
                                   _buildTaskCard(
-                                    title: "Pemrograman Berbasis Objek (OOP)",
+                                    title: "OOP",
                                     color: _paletteColors[3],
                                     // members: [
                                     //   'assets/user1.png',
@@ -255,6 +257,7 @@ Widget _buildTaskCard({
   // required List<String> members,
   required bool completed,
   double progress = 0.0, // Menambahkan progress (opsional)
+  Color textColor = Colors.black,
 }) {
   return Card(
     color: color,
@@ -408,7 +411,7 @@ class _QuizListPageState extends State<QuizListPage> {
 
   final List<Map<String, Object>> quizzes = [
     {
-      'name': 'Dasar-Dasar Pemrograman',
+      'name': 'Dasar Pemrograman',
       'students': '125 Students',
       'icon': 'assets/ddp.jpg',
       'questions': [
@@ -436,7 +439,7 @@ class _QuizListPageState extends State<QuizListPage> {
       ],
     },
     {
-      'name': 'Bahasa Pemrograman (Python, Java, C++)',
+      'name': 'Bahasa Pemrograman',
       'students': '120 Students',
       'icon': 'assets/bp.jpg',
       'questions': [
@@ -469,7 +472,7 @@ class _QuizListPageState extends State<QuizListPage> {
       ],
     },
     {
-      'name': 'Algoritma dan Struktur Data',
+      'name': 'Algoritma',
       'students': '125 Students',
       'icon': 'assets/asd.jpg',
       'questions': [
@@ -535,7 +538,7 @@ class _QuizListPageState extends State<QuizListPage> {
       ],
     },
     {
-      'name': 'Logika dan Matematika dalam Coding',
+      'name': 'Matematika dalam Coding',
       'students': '125 Students',
       'icon': 'assets/lmc.jpg',
       'questions': [
@@ -573,7 +576,7 @@ class _QuizListPageState extends State<QuizListPage> {
       ],
     },
     {
-      'name': 'Pemrograman Berbasis Objek (OOP)',
+      'name': 'OOP',
       'students': '125 Students',
       'icon': 'assets/pbo.jpg',
       'questions': [
@@ -679,7 +682,7 @@ class _QuizListPageState extends State<QuizListPage> {
                     child: Text(
                       quiz['name'] as String,
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -809,7 +812,7 @@ class _SubmitScreenState extends State<SubmitScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Proyek UAS",
+                        "My work",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -817,12 +820,12 @@ class _SubmitScreenState extends State<SubmitScreen> {
                       ),
                       const SizedBox(height: 10),
                       const Text(
-                        "Due November 26, 2024 11:59 PM",
+                        "Upload your Files",
                         style: TextStyle(fontSize: 16, color: Colors.grey),
                       ),
                       const SizedBox(height: 20),
                       const Text(
-                        "My work",
+                        "Here",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
