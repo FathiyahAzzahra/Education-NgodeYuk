@@ -14,16 +14,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 5;
 
   // Daftar halaman yang akan ditampilkan berdasarkan tab yang dipilih
   static final List<Widget> _widgetOptions = <Widget>[
-    MainProfileScreen(), // Halaman Profile
     CoursesPage(), // Halaman Courses
     NotificationView(), // Halaman Activity
     CalendarScreen(), // Halaman Calendar
     AssignmentsPage(), // Halaman Assignments
     ChatPage(), // Halaman Chat
+    MainProfileScreen(), // Halaman Profile
   ];
 
   void _onItemTapped(int index) {

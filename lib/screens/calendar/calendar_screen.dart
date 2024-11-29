@@ -91,12 +91,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Calendar',
-          style: TextStyle(
-            color: Color(0xFFB0A565), // Mengubah warna teks
-            fontWeight: FontWeight.bold, // Membuat teks menjadi bold
-          ),
+        title: Row(
+          children: [
+            Icon(
+              Icons.calendar_today, // Ikon kalender
+              color: Color(0xFFEDE68A), // Warna ikon
+            ),
+            SizedBox(width: 8), // Memberikan jarak antara ikon dan teks
+            const Text(
+              'Calendar',
+              style: TextStyle(
+                color: Color(0xFFB0A565), // Warna teks
+                fontWeight: FontWeight.bold, // Membuat teks menjadi bold
+              ),
+            ),
+          ],
         ),
         automaticallyImplyLeading: false,
         backgroundColor: Color(0xFF383A56), // Mengubah warna AppBar

@@ -46,7 +46,7 @@ class PremiumCoursesPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       appBar: AppBar(
-        backgroundColor: Color(0xFF2F3032),
+        backgroundColor: Color(0xFF383A56),
         title: Row(
           children: [
             Icon(Icons.star, color: Color(0xFFEDE68A)),
@@ -135,7 +135,7 @@ class PremiumCoursesPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF2F3032),
+                  backgroundColor: Color(0xFF383A56),
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
