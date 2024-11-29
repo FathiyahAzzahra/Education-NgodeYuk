@@ -12,6 +12,7 @@ class FirstPage extends StatelessWidget {
           style: TextStyle(color: Color(0xFFEDE68A)),
         ),
         backgroundColor: Color(0xFF383A56),
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
