@@ -4,7 +4,7 @@ import '../activity/NotificationView.dart'; // Tambahkan halaman Activity
 import '../calendar/calendar_screen.dart'; // Tambahkan halaman Calendar
 import '../assignments/assignments_page.dart'; // Tambahkan halaman Assignments
 import '../chat/chat_page.dart'; // Tambahkan halaman Chat
-import '../profile/profile_page.dart'; // Tambahkan halaman Profile
+import '../profile/main_profile.dart'; // Tambahkan halaman Profile
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,12 +18,12 @@ class _HomePageState extends State<HomePage> {
 
   // Daftar halaman yang akan ditampilkan berdasarkan tab yang dipilih
   static final List<Widget> _widgetOptions = <Widget>[
+    MainProfileScreen(), // Halaman Profile
     CoursesPage(), // Halaman Courses
     NotificationView(), // Halaman Activity
     CalendarScreen(), // Halaman Calendar
     AssignmentsPage(), // Halaman Assignments
     ChatPage(), // Halaman Chat
-    ProfilePage(), // Halaman Profile
   ];
 
   void _onItemTapped(int index) {
