@@ -1,5 +1,6 @@
 // lib/services/firestore_service.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../models/chapter_model.dart';
 import '../models/course_model.dart';
 import '../models/event_model.dart';
@@ -333,7 +334,8 @@ class FirestoreService {
   // CRUD UNTUK EVENTS
 
   /// Menambahkan event baru ke koleksi Firebase Firestore.
-  Future<void> addEvent(String name, DateTime date, String time) async {
+  Future<void> addEvent(
+      String name, DateTime date, String time, String? userId) async {
     try {
       // Validasi input
       if (name.isEmpty || time.isEmpty) {
@@ -345,10 +347,57 @@ class FirestoreService {
         'name': name,
         'date': Timestamp.fromDate(date), // Simpan sebagai timestamp
         'time': time, // Simpan waktu dalam format string
+        'userId': userId,
       });
     } catch (e) {
       throw Exception('Failed to add event. Error: $e');
     }
+  }
+
+  /// Menghapus event dari koleksi Firebase Firestore.
+  Future<void> deleteEvent(String eventId) async {
+    try {
+      // Hapus event berdasarkan ID
+      await eventCollection.doc(eventId).delete();
+    } catch (e) {
+      throw Exception('Failed to delete event. Error: $e');
+    }
+  }
+
+  /// Mendapatkan daftar event berdasarkan userId
+  Future<List<EventModel>> getEventsByUserId(String userId) async {
+    try {
+      QuerySnapshot snapshot = await _db
+          .collection('events')
+          .where('userId', isEqualTo: userId) // Filter berdasarkan userId
+          .get();
+
+      return snapshot.docs.map((doc) {
+        return EventModel.fromMap(doc.data() as Map<String, dynamic>, doc.id);
+      }).toList();
+    } catch (e) {
+      print("Failed to load events: $e");
+      return [];
+    }
+  }
+
+  Future<Map<DateTime, List<EventModel>>> fetchEventsFromDatabase() async {
+    final snapshot =
+        await FirebaseFirestore.instance.collection('events').get();
+    Map<DateTime, List<EventModel>> eventMap = {};
+
+    for (var doc in snapshot.docs) {
+      DateTime eventDate = (doc['date'] as Timestamp).toDate();
+      EventModel event = EventModel.fromMap(doc.data(), doc.id);
+
+      // Menambahkan event ke tanggal yang sesuai
+      if (!eventMap.containsKey(eventDate)) {
+        eventMap[eventDate] = [];
+      }
+      eventMap[eventDate]!.add(event);
+    }
+
+    return eventMap;
   }
 
   /// Mengambil semua event dari Firestore dan mengonversinya menjadi Map<DateTime, List<String>>.
@@ -383,6 +432,24 @@ class FirestoreService {
       return eventMap;
     } catch (e) {
       throw Exception('Error fetching events: $e');
+    }
+  }
+
+  static Future<String?> getCurrentUserId() async {
+    try {
+      // Mendapatkan pengguna yang sedang login
+      final User? user = FirebaseAuth.instance.currentUser;
+
+      // Memeriksa apakah user valid
+      if (user != null) {
+        return user.uid; // Mengembalikan user ID
+      } else {
+        print("No user is currently signed in.");
+        return null; // Jika tidak ada user yang login
+      }
+    } catch (e) {
+      print("Error getting current user ID: $e");
+      return null; // Jika ada error
     }
   }
 }

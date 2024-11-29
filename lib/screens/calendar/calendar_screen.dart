@@ -11,39 +11,42 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreenState extends State<CalendarScreen> {
   final FirestoreService firebaseService = FirestoreService();
-  Map<DateTime, List<String>> events = {};
+  Map<DateTime, List<EventModel>> events = {};
   DateTime? selectedDate;
   List<String> dailyTasks = [];
-  String selectedTime = ''; // Menyimpan waktu yang dipilih
+  String selectedTime = '';
+
+  final GlobalKey<DailyTaskWidgetState> _dailyTaskKey =
+      GlobalKey<DailyTaskWidgetState>();
+
+  void onEventAdded() {
+    // Trigger a refresh of the daily tasks when an event is added
+    if (selectedDate != null) {
+      onDateSelected(selectedDate!);
+    }
+    _dailyTaskKey.currentState?.loadEvents();
+  }
+
+  void onDateSelected(DateTime date) {
+    // setState(() {
+    //   selectedDate = DateTime(date.year, date.month, date.day);
+    //   dailyTasks = events[selectedDate] ?? [];
+    //   selectedTime = '';
+    // });
+  }
 
   @override
   void initState() {
     super.initState();
-    fetchEvents();
+    loadEv();
   }
 
-  void fetchEvents() async {
-    try {
-      print("Fetching events...");
-      final eventsMap = await firebaseService.getEventsAsMap();
-      setState(() {
-        events = eventsMap;
-      });
-      print("Events fetched successfully: $events");
-
-      if (selectedDate != null) {
-        onDateSelected(selectedDate!);
-      }
-    } catch (e) {
-      print("Error fetching events: $e");
-    }
-  }
-
-  void onDateSelected(DateTime date) {
+  Future<void> loadEv() async {
+    FirestoreService firestoreService = FirestoreService();
+    Map<DateTime, List<EventModel>> fetchedEvents =
+        await firestoreService.fetchEventsFromDatabase();
     setState(() {
-      selectedDate = DateTime(date.year, date.month, date.day);
-      dailyTasks = events[selectedDate] ?? [];
-      selectedTime = ''; // Reset selectedTime when the date changes
+      events = fetchedEvents;
     });
   }
 
@@ -55,18 +58,16 @@ class _CalendarScreenState extends State<CalendarScreen> {
       return;
     }
 
+    String? userId = await FirestoreService.getCurrentUserId();
+
     try {
-      print("Adding event...");
-      await firebaseService.addEvent(name, date, time);
+      await firebaseService.addEvent(name, date, time, userId);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Event added successfully.")),
       );
 
-      fetchEvents();
-
-      if (selectedDate != null) {
-        onDateSelected(selectedDate!);
-      }
+      // Notify the child widget (DailyTaskWidget) to update
+      onEventAdded();
     } catch (e) {
       print("Error adding event: $e");
       ScaffoldMessenger.of(context).showSnackBar(
@@ -126,16 +127,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
           ),
           Expanded(
-            child: DailyTaskWidget(
-              tasks: dailyTasks,
-              onDeleteTask: (task) {
-                // Implementasi hapus task
-                setState(() {
-                  dailyTasks.remove(task);
-                  events[selectedDate]?.remove(task);
-                });
-              },
-            ),
+            child: DailyTaskWidget(onEventAdded: onEventAdded),
           ),
         ],
       ),
@@ -268,20 +260,24 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 actions: [
                   TextButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.of(context).pop();
                     },
                     child: Text(
                       "Cancel",
                       style: TextStyle(color: Color(0xFFEDE68A)),
                     ),
                   ),
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () {
-                      addEvent(nameController.text, pickedDate, selectedTime);
-                      Navigator.pop(context);
+                      String name = nameController.text;
+                      addEvent(name, pickedDate, selectedTime);
+                      Navigator.of(context).pop();
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFB0A565),
+                    ),
                     child: Text(
-                      "Save",
+                      "Add Event",
                       style: TextStyle(color: Color(0xFFEDE68A)),
                     ),
                   ),

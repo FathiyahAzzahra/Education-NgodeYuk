@@ -1,80 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ngodeyuk/models/event_model.dart';
+import 'package:ngodeyuk/services/firestore_service.dart';
 
-class DailyTaskWidget extends StatelessWidget {
-  final List<String> tasks;
-  final Function(String)? onDeleteTask; // Callback untuk menghapus tugas
+class DailyTaskWidget extends StatefulWidget {
+  final Function onEventAdded; // Add a callback for event added
 
-  // Konstruktor
-  DailyTaskWidget({
-    required this.tasks,
-    this.onDeleteTask, // Opsional: jika null, tombol hapus tidak akan muncul
-  });
+  const DailyTaskWidget({super.key, required this.onEventAdded});
+
+  @override
+  DailyTaskWidgetState createState() => DailyTaskWidgetState();
+}
+
+class DailyTaskWidgetState extends State<DailyTaskWidget> {
+  late List<EventModel> tasks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadEvents();
+  }
+
+  void loadEvents() async {
+    final String? userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId != null) {
+      try {
+        FirestoreService firestoreService = FirestoreService();
+        List<EventModel> loadedEvents =
+            await firestoreService.getEventsByUserId(userId);
+
+        setState(() {
+          tasks = loadedEvents;
+        });
+      } catch (e) {
+        print('Failed to load events: $e');
+      }
+    }
+  }
+
+  void _onDeleteTask(EventModel event) async {
+    try {
+      await FirestoreService().deleteEvent(event.id);
+      loadEvents(); // Reload events after deletion
+    } catch (e) {
+      print('Failed to delete event: $e');
+    }
+  }
+
+  void onEventAdded() async {
+    print('hai');
+    loadEvents();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Menampilkan pesan jika tidak ada tugas
     return tasks.isEmpty
-        ? Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.task_alt,
-                  color: Color(0xFFB0A565), // Warna ikon
-                  size: 60,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "No tasks for this day!",
-                  style: TextStyle(
-                    color: Color(0xFFEDE68A), // Warna teks
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          )
+        ? Center(child: Text('No events for this day.'))
         : ListView.builder(
             itemCount: tasks.length,
             padding: EdgeInsets.symmetric(vertical: 10),
             itemBuilder: (context, index) {
+              final event = tasks[index];
               return Card(
-                color: Color(0xFF383A56), // Warna latar belakang kartu
+                color: Color(0xFF383A56),
                 margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                elevation: 4, // Efek bayangan kartu
+                elevation: 4,
                 child: ListTile(
-                  key: ValueKey(
-                      tasks[index]), // Memastikan key unik untuk setiap item
                   title: Text(
-                    tasks[index],
+                    event.title,
                     style: TextStyle(
-                      color: Color(0xFFEDE68A), // Warna teks
+                      color: Color(0xFFEDE68A),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  subtitle: Text(
+                    "${event.date} - ${event.time}",
+                    style: TextStyle(color: Color(0xFFEDE68A)),
+                  ),
                   leading: CircleAvatar(
-                    backgroundColor: Color(0xFFB0A565), // Warna avatar
+                    backgroundColor: Color(0xFFB0A565),
                     child: Icon(
-                      Icons.check,
-                      color: Colors.white, // Warna ikon di dalam avatar
+                      Icons.event,
+                      color: Colors.white,
                     ),
                   ),
-                  trailing: onDeleteTask != null
-                      ? IconButton(
-                          icon: Icon(
-                            Icons.delete,
-                            color: Color(0xFFEDE68A), // Warna ikon hapus
-                          ),
-                          onPressed: () {
-                            // Memanggil callback onDeleteTask jika ada
-                            onDeleteTask!(tasks[index]);
-                          },
-                        )
-                      : null, // Jika tidak ada onDeleteTask, tidak menampilkan ikon hapus
+                  trailing: IconButton(
+                    icon: Icon(
+                      Icons.delete,
+                      color: Color(0xFFEDE68A),
+                    ),
+                    onPressed: () {
+                      _onDeleteTask(event);
+                    },
+                  ),
                 ),
               );
             },

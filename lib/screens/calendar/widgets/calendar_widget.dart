@@ -3,7 +3,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:ngodeyuk/models/event_model.dart';
 
 class CalendarWidget extends StatelessWidget {
-  final Map<DateTime, List<String>> events;
+  final Map<DateTime, List<EventModel>> events; // Menggunakan model EventModel
   final Function(DateTime) onDateSelected;
   final Color holidayTextColor; // Warna khusus untuk hari Minggu
   final Color previousMonthTextColor;
@@ -16,6 +16,10 @@ class CalendarWidget extends StatelessWidget {
     required this.previousMonthTextColor,
     this.dayNameTextStyle,
   });
+
+  DateTime normalizeDate(DateTime date) {
+    return DateTime(date.year, date.month, date.day); // Mengabaikan waktu
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +34,9 @@ class CalendarWidget extends StatelessWidget {
         firstDay: DateTime.utc(2000),
         lastDay: DateTime.utc(2100),
         eventLoader: (day) {
-          // Menampilkan event pada tanggal yang dipilih
-          return events[day] ?? [];
+          DateTime normalizedDay = normalizeDate(day);
+          List<EventModel> dayEvents = events[normalizedDay] ?? [];
+          return dayEvents;
         },
         calendarStyle: CalendarStyle(
           todayDecoration: BoxDecoration(
@@ -86,6 +91,24 @@ class CalendarWidget extends StatelessWidget {
           // Menangani pemilihan tanggal
           onDateSelected(selectedDay);
         },
+        calendarBuilders: CalendarBuilders(
+          markerBuilder: (context, date, events) {
+            if (events.isNotEmpty) {
+              return Positioned(
+                bottom: 1,
+                child: Container(
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: Colors.green, // Warna bulatan hijau
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              );
+            }
+            return SizedBox();
+          },
+        ),
       ),
     );
   }

@@ -1,30 +1,33 @@
-class Event {
-  String id;
-  String name;
-  DateTime date;
-  String time;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  Event({
+class EventModel {
+  final String id;
+  final String title;
+  final DateTime date; // Ubah menjadi DateTime
+  final String time;
+
+  EventModel({
     required this.id,
-    required this.name,
+    required this.title,
     required this.date,
     required this.time,
   });
 
-  factory Event.fromMap(Map<String, dynamic> map, String id) {
-    return Event(
+  factory EventModel.fromMap(Map<String, dynamic> map, String id) {
+    return EventModel(
       id: id,
-      name: map['name'],
-      date: DateTime.parse(map['date']), // Pastikan formatnya sesuai
+      title: map['name'],
+      date: (map['date'] as Timestamp)
+          .toDate(), // Mengonversi Timestamp ke DateTime
       time: map['time'],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id, // Tambahkan id agar sesuai struktur Firebase
-      'name': name,
-      'date': date.toIso8601String(), // Simpan dalam format ISO
+      'id': id,
+      'title': title,
+      'date': Timestamp.fromDate(date), // Mengonversi DateTime ke Timestamp
       'time': time,
     };
   }
