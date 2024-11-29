@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:ngodeyuk/models/event_model.dart';
+import 'package:ngodeyuk/models/event_model.dart';
 import '../../services/firestore_service.dart';
 import '../calendar/widgets/calendar_widget.dart';
 import '../calendar/widgets/daily_task_widget.dart';

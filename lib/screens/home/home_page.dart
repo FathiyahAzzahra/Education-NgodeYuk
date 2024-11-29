@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../courses/courses_page.dart';
 import '../activity/NotificationView.dart'; // Tambahkan halaman Activity
 import '../calendar/calendar_screen.dart'; // Tambahkan halaman Calendar
-import '../assignments/assignments_page.dart'; // Tambahkan halaman Assignments
-import '../chat/chat_page.dart'; // Tambahkan halaman Chat
+import '../assignments/assignments_quiz.dart'; // Tambahkan halaman Assignments
+import '../chat/first_page.dart'; // Tambahkan halaman Chat
 import '../profile/main_profile.dart'; // Tambahkan halaman Profile
 
 class HomePage extends StatefulWidget {
@@ -21,8 +21,8 @@ class _HomePageState extends State<HomePage> {
     CoursesPage(), // Halaman Courses
     NotificationView(), // Halaman Activity
     CalendarScreen(), // Halaman Calendar
-    AssignmentsPage(), // Halaman Assignments
-    ChatPage(), // Halaman Chat
+    AssignmentQuizPage(), // Halaman Assignments
+    FirstPage(), // Halaman Chat
     MainProfileScreen(), // Halaman Profile
   ];
 
