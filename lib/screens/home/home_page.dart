@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../courses/courses_page.dart';
 import '../activity/NotificationView.dart'; // Tambahkan halaman Activity
 import '../calendar/calendar_page.dart'; // Tambahkan halaman Calendar
-import '../assignments/assignments_page.dart'; // Tambahkan halaman Assignments
+import '../assignments/assignments_quiz.dart'; // Tambahkan halaman Assignments
 import '../chat/chat_page.dart'; // Tambahkan halaman Chat
 import '../profile/profile_page.dart'; // Tambahkan halaman Profile
 
@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
@@ -19,9 +20,9 @@ class _HomePageState extends State<HomePage> {
   // Daftar halaman yang akan ditampilkan berdasarkan tab yang dipilih
   static final List<Widget> _widgetOptions = <Widget>[
     CoursesPage(), // Halaman Courses
-    NotificationView(), // Halaman Activity
+    const NotificationView(), // Halaman Activity
     CalendarPage(), // Halaman Calendar
-    AssignmentsPage(), // Halaman Assignments
+    const AssignmentQuizPage(), // Halaman Assignments
     ChatPage(), // Halaman Chat
     ProfilePage(), // Halaman Profile
   ];

@@ -5,14 +5,16 @@ import '../../models/chapter_model.dart';
 import '../../models/user_model.dart';
 import '../../services/firestore_service.dart';
 import '../courses/chapterdetail_page.dart';
-import '../assignments/assignments_page.dart';
+// ignore: unused_import
+import '../assignments/assignments_quiz.dart';
 
 class ChapterListPage extends StatefulWidget {
   final String subjectName;
 
-  ChapterListPage({required this.subjectName});
+  const ChapterListPage({super.key, required this.subjectName});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ChapterListPageState createState() => _ChapterListPageState();
 }
 
@@ -277,7 +279,8 @@ class _ChapterListPageState extends State<ChapterListPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AssignmentsPage(), // Navigasi ke quiz
+                  builder: (context) =>
+                      const AssignmentQuizPage(), // Navigasi ke quiz
                 ),
               );
             },
